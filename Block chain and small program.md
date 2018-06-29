@@ -58,6 +58,27 @@ brew tap ethereum/ethereum brew install ethereum
   }
 }
 ```
+{
+  // proof-of-work，确认这个区块的挖掘者确实做了足够多的计算找到了合法的
+  // nonce 和 mixhash 是作为输入，让每个节点都可以通过计算来做
+  "nonce": "0x0000000000000042",
+  "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "difficulty": "0x400",  // difficulty 就是制定了本链一开始的挖矿难度，在我们的私有测试节点中，这个值设得很低，这样就比较容易挖到矿
+  "alloc": {},   // alloc 可以预分配一些以太币给某些地址，这里我们不做预分配
+  "coinbase": "0x0000000000000000000000000000000000000000",  // coinbase 就是当成功挖出 genesis 区块后，接收奖金的地址
+  "timestamp": "0x0",   // timestamp 本区块挖出来的时间戳，全网将依据前后，两个区块的时间戳之差来调整挖矿的难度
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",  // parentHash 指向前一个区块的哈希指针，创世纪区块中的 parentHash 接地
+  "extraData": "0x",   // extraData 可用于存储任何信息
+  "gasLimit": "0xffffffff",  // gasLimit 规定了每一个区块中能够消耗的最大的 gas 值，也就事实上限制了区块的大小
+
+  // config 用来为这个私有网络确立一系列参数
+  "config": {
+      "chainId": 4224,     // chainId 是本私有链的 ID
+      "homesteadBlock": 0, // homesteadBlock 指明 Homestead 版本的兼容的区块开始编号
+      "eip155Block": 0,    // EIP155 兼容的区块开始编号,EIP155 - "Simple Relay Attack Protection"
+      "eip158Block": 0     // EIP158 兼容的区块开始编号
+  }
+}
 
 #### 第三步
 
